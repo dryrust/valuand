@@ -1,0 +1,33 @@
+# See: https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "valuand"
+version = "0.0.0"
+authors = ["Arto Bendiken"]
+edition = "2024"
+#rust-version = "1.85"
+description = "The value to be carried."
+#documentation = "https://docs.rs/valuand"
+readme = true
+homepage = "https://github.com/dryrust/valuand"
+repository = "https://github.com/dryrust/valuand"
+license = "Unlicense"
+keywords = ["value", "variant"]
+categories = ["rust-patterns", "no-std"]
+publish = true
+
+[features]
+default = ["all", "std"]
+all = []
+alloc = []
+std = ["alloc"]
+unstable = []
+
+# Integrations:
+serde = ["dep:serde", "dep:serde_json"]
+
+[dependencies]
+
+# Integrations:
+serde = { version = "1", default-features = false, features = ["derive"], optional = true }
+serde_json = { version = "1", default-features = false, features = ["alloc"], optional = true }
