@@ -13,3 +13,14 @@ extern crate std;
 #[doc = include_str!("../README.md")]
 #[cfg(doctest)]
 pub struct ReadmeDoctests;
+
+#[cfg(feature = "alloc")]
+mod any_value;
+#[cfg(feature = "alloc")]
+pub use any_value::*;
+
+mod value;
+pub use value::*;
+
+mod value_type;
+pub use value_type::*;
