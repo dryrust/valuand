@@ -9,7 +9,7 @@ pub struct T;
 
 /// A sum type that can hold values of any static type.
 #[derive(Debug, Default)]
-pub enum Value<T: Debug = super::T> {
+pub enum Value<T: Debug = self::T> {
     #[default]
     Unit,
     Bool(bool),
@@ -20,7 +20,7 @@ pub enum Value<T: Debug = super::T> {
     Other(T),
 }
 
-impl Value {
+impl<T: Debug + 'static> Value<T> {
     pub fn r#type(&self) -> ValueType {
         self.into()
     }
@@ -30,56 +30,50 @@ impl Value {
     }
 }
 
-impl From<()> for Value {
+impl<T: Debug> From<()> for Value<T> {
     fn from(_input: ()) -> Self {
         Self::Unit
     }
 }
 
-impl From<bool> for Value {
+impl<T: Debug> From<bool> for Value<T> {
     fn from(input: bool) -> Self {
         Self::Bool(input)
     }
 }
 
-impl From<i32> for Value {
+impl<T: Debug> From<i32> for Value<T> {
     fn from(input: i32) -> Self {
         Self::I32(input)
     }
 }
 
-impl From<u32> for Value {
+impl<T: Debug> From<u32> for Value<T> {
     fn from(input: u32) -> Self {
         Self::U32(input)
     }
 }
 
-impl From<i64> for Value {
+impl<T: Debug> From<i64> for Value<T> {
     fn from(input: i64) -> Self {
         Self::I64(input)
     }
 }
 
-impl From<u64> for Value {
+impl<T: Debug> From<u64> for Value<T> {
     fn from(input: u64) -> Self {
         Self::U64(input)
     }
 }
 
-impl<T: Debug> From<T> for Value<T> {
-    fn from(input: T) -> Self {
-        Self::Other(input)
+impl<T: Debug> From<Value<T>> for () {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<Value> for () {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
-    }
-}
-
-impl From<&Value> for () {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for () {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::Unit => (),
             _ => unreachable!(),
@@ -87,14 +81,14 @@ impl From<&Value> for () {
     }
 }
 
-impl From<Value> for bool {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
+impl<T: Debug> From<Value<T>> for bool {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<&Value> for bool {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for bool {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::Bool(value) => *value,
             _ => unreachable!(),
@@ -102,14 +96,14 @@ impl From<&Value> for bool {
     }
 }
 
-impl From<Value> for i32 {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
+impl<T: Debug> From<Value<T>> for i32 {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<&Value> for i32 {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for i32 {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::I32(value) => *value,
             _ => unreachable!(),
@@ -117,14 +111,14 @@ impl From<&Value> for i32 {
     }
 }
 
-impl From<Value> for u32 {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
+impl<T: Debug> From<Value<T>> for u32 {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<&Value> for u32 {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for u32 {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::U32(value) => *value,
             _ => unreachable!(),
@@ -132,14 +126,14 @@ impl From<&Value> for u32 {
     }
 }
 
-impl From<Value> for i64 {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
+impl<T: Debug> From<Value<T>> for i64 {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<&Value> for i64 {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for i64 {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::I32(value) => *value as _,
             Value::U32(value) => *value as _,
@@ -149,14 +143,14 @@ impl From<&Value> for i64 {
     }
 }
 
-impl From<Value> for u64 {
-    fn from(input: Value) -> Self {
-        From::<&Value>::from(&input)
+impl<T: Debug> From<Value<T>> for u64 {
+    fn from(input: Value<T>) -> Self {
+        From::<&Value<T>>::from(&input)
     }
 }
 
-impl From<&Value> for u64 {
-    fn from(input: &Value) -> Self {
+impl<T: Debug> From<&Value<T>> for u64 {
+    fn from(input: &Value<T>) -> Self {
         match input {
             Value::I32(value) => *value as _,
             Value::U32(value) => *value as _,
