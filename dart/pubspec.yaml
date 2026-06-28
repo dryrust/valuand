@@ -1,0 +1,14 @@
+# See: https://dart.dev/tools/pub/pubspec
+---
+name: valuand
+version: 0.0.1
+description: >-
+  Valuand for Dart
+homepage: https://github.com/dryrust/valuand
+repository: https://github.com/dryrust/valuand
+issue_tracker: https://github.com/dryrust/valuand/issues
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.0
+environment:
+  sdk: ^3.11.0
