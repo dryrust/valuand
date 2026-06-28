@@ -5,14 +5,11 @@
 #![no_std]
 #![forbid(unsafe_code)]
 
+#[cfg(feature = "alloc")]
 extern crate alloc;
 
 #[cfg(feature = "std")]
 extern crate std;
-
-#[doc = include_str!("../README.md")]
-#[cfg(doctest)]
-pub struct ReadmeDoctests;
 
 #[cfg(feature = "alloc")]
 mod any_value;
@@ -24,3 +21,7 @@ pub use value::*;
 
 mod value_type;
 pub use value_type::*;
+
+#[doc = include_str!("../../README.md")]
+#[cfg(doctest)]
+pub struct ReadmeDoctests;

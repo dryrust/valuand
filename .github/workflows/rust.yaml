@@ -19,11 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: cargo build
+        run: cd rust && cargo build
       - name: Build examples
-        run: cargo build --examples
+        run: cd rust && cargo build --examples
       - name: Run tests
-        run: cargo test
+        run: cd rust && cargo test
   build-windows:
     name: Build on Windows
     runs-on: windows-latest
@@ -31,8 +31,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: cargo build
+        run: cd rust && cargo build
       - name: Build examples
-        run: cargo build --examples
+        run: cd rust && cargo build --examples
       - name: Run tests
-        run: cargo test
+        run: cd rust && cargo test
