@@ -1,0 +1,59 @@
+{
+  "name": "valuand",
+  "version": "0.0.1",
+  "description": "Valuand for JS/TS",
+  "homepage": "https://github.com/dryrust/valuand",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dryrust/valuand.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dryrust/valuand/issues"
+  },
+  "author": {
+    "name": "Arto Bendiken",
+    "email": "arto@bendiken.net",
+    "url": "https://ar.to"
+  },
+  "license": "Unlicense",
+  "keywords": [
+    "valuand"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "UNLICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --out-dir dist",
+    "clean": "rm -rf dist",
+    "prepare": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "latest",
+    "tsup": "latest",
+    "typescript": "^5.4.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
