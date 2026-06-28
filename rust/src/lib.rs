@@ -4,6 +4,7 @@
 
 #![no_std]
 #![forbid(unsafe_code)]
+#![allow(unused_imports)]
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
@@ -15,6 +16,9 @@ extern crate std;
 mod any_value;
 #[cfg(feature = "alloc")]
 pub use any_value::*;
+
+mod number;
+pub use number::*;
 
 mod value;
 pub use value::*;

@@ -8,3 +8,5 @@ except importlib.metadata.PackageNotFoundError:
     # This acts as a fallback if the code is being run directly
     # without having been installed first (e.g., local development):
     __version__ = "unknown"
+
+from .number import *

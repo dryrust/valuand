@@ -1,4 +1,3 @@
 # This is free and unencumbered software released into the public domain.
 
-require_relative 'valuand/number'
-require_relative 'valuand/version'
+# See: https://docs.python.org/3/library/fractions.html

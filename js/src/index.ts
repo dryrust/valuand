@@ -1,3 +1,5 @@
 // This is free and unencumbered software released into the public domain.
 
 export default {};
+
+export * from "./number.js";
