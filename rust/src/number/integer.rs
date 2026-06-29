@@ -5,6 +5,7 @@ pub type Int = Integer;
 
 /// An integer number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Integer {
     I8(i8),
     I16(i16),

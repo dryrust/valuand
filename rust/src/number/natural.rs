@@ -5,6 +5,7 @@ pub type Nat = Natural;
 
 /// A natural number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Natural {
     U8(u8),
     U16(u16),

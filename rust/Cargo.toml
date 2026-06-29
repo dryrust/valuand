@@ -33,7 +33,7 @@ rational = ["dep:num-rational"]
 real = ["decimal", "float", "integer", "rational"]
 
 # Interoperability:
-serde = ["dep:serde", "dep:serde_json"]
+serde = ["dep:serde", "dep:serde_json", "rust_decimal?/serde-with-str"]
 
 [dependencies]
 

@@ -4,6 +4,7 @@ use decorum::Total;
 
 /// A floating-point number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Float {
     // TODO: F16(F16),
     F32(F32),
@@ -11,6 +12,13 @@ pub enum Float {
 }
 
 impl Float {
+    pub fn as_f32(&self) -> f32 {
+        match self {
+            Float::F32(f) => f.into_inner(),
+            Float::F64(f) => f.into_inner() as _,
+        }
+    }
+
     pub fn as_f64(&self) -> f64 {
         match self {
             Float::F32(f) => f.into_inner() as _,

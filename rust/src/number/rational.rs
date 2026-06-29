@@ -7,6 +7,7 @@ pub type Rat = Rational;
 
 /// A rational number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Rational {
     pub numerator: Integer,
     pub denominator: Integer,
