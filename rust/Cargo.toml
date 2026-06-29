@@ -23,23 +23,22 @@ alloc = []
 std = ["alloc"]
 unstable = []
 
-# Features:
-number = [
-    "dep:decorum",
-    "dep:num-bigint",
-    "dep:num-complex",
-    "dep:num-integer",
-    "dep:num-rational",
-    "dep:rust_decimal",
-]
+# The "number" feature:
+number = ["complex", "decimal", "float", "integer", "rational"]
+complex = ["dep:num-complex"]
+decimal = ["dep:rust_decimal"]
+float = ["dep:decorum", "dep:half"]
+integer = ["dep:num-bigint", "dep:num-integer"]
+rational = ["dep:num-rational"]
 
 # Interoperability:
 serde = ["dep:serde", "dep:serde_json"]
 
 [dependencies]
 
-# Feature "number":
+# The "number" feature:
 decorum = { version = "0.4", default-features = false, optional = true }
+half = { version = "2.7", default-features = false, optional = true }
 num-bigint = { version = "0.4", default-features = false, optional = true }
 num-complex = { version = "0.4", default-features = false, optional = true }
 num-integer = { version = "0.1", default-features = false, optional = true }

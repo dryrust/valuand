@@ -17,7 +17,9 @@ mod any_value;
 #[cfg(feature = "alloc")]
 pub use any_value::*;
 
+#[cfg(feature = "number")]
 mod number;
+#[cfg(feature = "number")]
 pub use number::*;
 
 mod value;
