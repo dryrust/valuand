@@ -22,32 +22,10 @@ impl Natural {
     }
 }
 
-impl From<u8> for Natural {
-    fn from(input: u8) -> Self {
-        Self::U8(input)
-    }
-}
-
-impl From<u16> for Natural {
-    fn from(input: u16) -> Self {
-        Self::U16(input)
-    }
-}
-
-impl From<u32> for Natural {
-    fn from(input: u32) -> Self {
-        Self::U32(input)
-    }
-}
-
-impl From<u64> for Natural {
-    fn from(input: u64) -> Self {
-        Self::U64(input)
-    }
-}
-
-impl From<u128> for Natural {
-    fn from(input: u128) -> Self {
-        Self::U128(input)
-    }
-}
+include!("natural/u8.rs");
+include!("natural/u16.rs");
+include!("natural/u32.rs");
+include!("natural/u64.rs");
+include!("natural/u128.rs");
+include!("natural/u256.rs");
+include!("natural/big.rs");

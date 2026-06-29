@@ -22,38 +22,10 @@ impl Integer {
     }
 }
 
-impl From<i8> for Integer {
-    fn from(input: i8) -> Self {
-        Self::I8(input)
-    }
-}
-
-impl From<i16> for Integer {
-    fn from(input: i16) -> Self {
-        Self::I16(input)
-    }
-}
-
-impl From<i32> for Integer {
-    fn from(input: i32) -> Self {
-        Self::I32(input)
-    }
-}
-
-impl From<i64> for Integer {
-    fn from(input: i64) -> Self {
-        Self::I64(input)
-    }
-}
-
-impl From<i128> for Integer {
-    fn from(input: i128) -> Self {
-        Self::I128(input)
-    }
-}
-
-impl From<Integer> for i128 {
-    fn from(input: Integer) -> Self {
-        input.as_i128()
-    }
-}
+include!("integer/i8.rs");
+include!("integer/i16.rs");
+include!("integer/i32.rs");
+include!("integer/i64.rs");
+include!("integer/i128.rs");
+include!("integer/i256.rs");
+include!("integer/big.rs");

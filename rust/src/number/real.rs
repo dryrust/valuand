@@ -1,8 +1,5 @@
 // This is free and unencumbered software released into the public domain.
 
-#[cfg(feature = "float")]
-use decorum::Total;
-
 use super::{Decimal, Float, Integer, Natural, Rational};
 
 /// A real number.
@@ -45,34 +42,6 @@ impl From<Float> for Real {
     }
 }
 
-#[cfg(feature = "float")]
-impl From<f32> for Real {
-    fn from(input: f32) -> Self {
-        Self::Float(input.into())
-    }
-}
-
-#[cfg(feature = "float")]
-impl From<Total<f32>> for Real {
-    fn from(input: Total<f32>) -> Self {
-        Self::Float(input.into())
-    }
-}
-
-#[cfg(feature = "float")]
-impl From<f64> for Real {
-    fn from(input: f64) -> Self {
-        Self::Float(input.into())
-    }
-}
-
-#[cfg(feature = "float")]
-impl From<Total<f64>> for Real {
-    fn from(input: Total<f64>) -> Self {
-        Self::Float(input.into())
-    }
-}
-
 #[cfg(feature = "integer")]
 impl From<Integer> for Real {
     fn from(input: Integer) -> Self {
@@ -81,79 +50,9 @@ impl From<Integer> for Real {
 }
 
 #[cfg(feature = "integer")]
-impl From<i8> for Real {
-    fn from(input: i8) -> Self {
-        Self::Integer(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<i16> for Real {
-    fn from(input: i16) -> Self {
-        Self::Integer(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<i32> for Real {
-    fn from(input: i32) -> Self {
-        Self::Integer(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<i64> for Real {
-    fn from(input: i64) -> Self {
-        Self::Integer(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<i128> for Real {
-    fn from(input: i128) -> Self {
-        Self::Integer(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
 impl From<Natural> for Real {
     fn from(input: Natural) -> Self {
         Self::Natural(input)
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<u8> for Real {
-    fn from(input: u8) -> Self {
-        Self::Natural(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<u16> for Real {
-    fn from(input: u16) -> Self {
-        Self::Natural(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<u32> for Real {
-    fn from(input: u32) -> Self {
-        Self::Natural(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<u64> for Real {
-    fn from(input: u64) -> Self {
-        Self::Natural(input.into())
-    }
-}
-
-#[cfg(feature = "integer")]
-impl From<u128> for Real {
-    fn from(input: u128) -> Self {
-        Self::Natural(input.into())
     }
 }
 
@@ -170,3 +69,18 @@ impl From<(Integer, Integer)> for Real {
         Self::Rational(input.into())
     }
 }
+
+include!("real/f32.rs");
+include!("real/f64.rs");
+
+include!("real/i8.rs");
+include!("real/i16.rs");
+include!("real/i32.rs");
+include!("real/i64.rs");
+include!("real/i128.rs");
+
+include!("real/u8.rs");
+include!("real/u16.rs");
+include!("real/u32.rs");
+include!("real/u64.rs");
+include!("real/u128.rs");
