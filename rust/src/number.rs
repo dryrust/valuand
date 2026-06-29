@@ -25,9 +25,9 @@ mod natural;
 #[cfg(feature = "integer")]
 pub use natural::*;
 
-#[cfg(feature = "rational")]
+#[cfg(all(feature = "rational", feature = "integer"))]
 mod rational;
-#[cfg(feature = "rational")]
+#[cfg(all(feature = "rational", feature = "integer"))]
 pub use rational::*;
 
 #[cfg(any(

@@ -29,3 +29,10 @@ include!("natural/u64.rs");
 include!("natural/u128.rs");
 include!("natural/u256.rs");
 include!("natural/big.rs");
+
+#[cfg(feature = "decimal")]
+impl From<Natural> for rust_decimal::Decimal {
+    fn from(input: Natural) -> Self {
+        input.into()
+    }
+}

@@ -1,29 +1,27 @@
 // This is free and unencumbered software released into the public domain.
 
-use super::{Decimal, Float, Integer, Natural, Rational};
-
 /// A real number.
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum Real {
     #[cfg(feature = "decimal")]
-    Decimal(Decimal),
+    Decimal(super::Decimal),
 
     #[cfg(feature = "float")]
-    Float(Float),
+    Float(super::Float),
 
     #[cfg(feature = "integer")]
-    Integer(Integer),
+    Integer(super::Integer),
 
     #[cfg(feature = "integer")]
-    Natural(Natural),
+    Natural(super::Natural),
 
     #[cfg(feature = "rational")]
-    Rational(Rational),
+    Rational(super::Rational),
 }
 
 #[cfg(feature = "decimal")]
-impl From<Decimal> for Real {
-    fn from(input: Decimal) -> Self {
+impl From<super::Decimal> for Real {
+    fn from(input: super::Decimal) -> Self {
         Self::Decimal(input)
     }
 }
@@ -36,36 +34,36 @@ impl From<rust_decimal::Decimal> for Real {
 }
 
 #[cfg(feature = "float")]
-impl From<Float> for Real {
-    fn from(input: Float) -> Self {
+impl From<super::Float> for Real {
+    fn from(input: super::Float) -> Self {
         Self::Float(input)
     }
 }
 
 #[cfg(feature = "integer")]
-impl From<Integer> for Real {
-    fn from(input: Integer) -> Self {
+impl From<super::Integer> for Real {
+    fn from(input: super::Integer) -> Self {
         Self::Integer(input)
     }
 }
 
 #[cfg(feature = "integer")]
-impl From<Natural> for Real {
-    fn from(input: Natural) -> Self {
+impl From<super::Natural> for Real {
+    fn from(input: super::Natural) -> Self {
         Self::Natural(input)
     }
 }
 
 #[cfg(feature = "rational")]
-impl From<Rational> for Real {
-    fn from(input: Rational) -> Self {
+impl From<super::Rational> for Real {
+    fn from(input: super::Rational) -> Self {
         Self::Rational(input)
     }
 }
 
 #[cfg(feature = "rational")]
-impl From<(Integer, Integer)> for Real {
-    fn from(input: (Integer, Integer)) -> Self {
+impl From<(super::Integer, super::Integer)> for Real {
+    fn from(input: (super::Integer, super::Integer)) -> Self {
         Self::Rational(input.into())
     }
 }

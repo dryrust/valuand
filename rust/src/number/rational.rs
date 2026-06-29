@@ -10,9 +10,9 @@ pub struct Rational {
 }
 
 impl From<Integer> for Rational {
-    fn from(numerator: Integer) -> Self {
+    fn from(input: Integer) -> Self {
         Self {
-            numerator,
+            numerator: input,
             denominator: 1.into(),
         }
     }
@@ -32,3 +32,9 @@ impl From<Rational> for (Integer, Integer) {
         (input.numerator, input.denominator)
     }
 }
+
+include!("rational/i8.rs");
+include!("rational/i16.rs");
+include!("rational/i32.rs");
+include!("rational/i64.rs");
+include!("rational/i128.rs");
