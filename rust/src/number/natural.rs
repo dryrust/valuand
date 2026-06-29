@@ -1,5 +1,8 @@
 // This is free and unencumbered software released into the public domain.
 
+/// A shorthand type alias for [`Natural`].
+pub type Nat = Natural;
+
 /// A natural number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum Natural {

@@ -2,6 +2,9 @@
 
 use super::Integer;
 
+/// A shorthand type alias for [`Rational`].
+pub type Rat = Rational;
+
 /// A rational number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct Rational {

@@ -24,12 +24,13 @@ std = ["alloc"]
 unstable = []
 
 # The "number" feature:
-number = ["complex", "decimal", "float", "integer", "rational"]
+number = ["complex", "real"]
 complex = ["dep:num-complex"]
 decimal = ["dep:rust_decimal"]
 float = ["dep:decorum", "dep:half"]
 integer = ["dep:num-bigint", "dep:num-integer"]
 rational = ["dep:num-rational"]
+real = ["decimal", "float", "integer", "rational"]
 
 # Interoperability:
 serde = ["dep:serde", "dep:serde_json"]
