@@ -27,6 +27,15 @@ impl Float {
     }
 }
 
+impl<T> From<&T> for Float
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 impl From<f32> for Float {
     fn from(input: f32) -> Self {
         Self::F32(input.into())

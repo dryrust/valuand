@@ -26,6 +26,15 @@ impl Integer {
     }
 }
 
+impl<T> From<&T> for Integer
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 include!("integer/i8.rs");
 include!("integer/i16.rs");
 include!("integer/i32.rs");

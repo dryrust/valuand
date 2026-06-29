@@ -10,6 +10,15 @@ pub struct Decimal(
     #[cfg_attr(feature = "serde", serde(with = "rust_decimal::serde::str"))] rust_decimal::Decimal,
 );
 
+impl<T> From<&T> for Decimal
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 include!("decimal/i8.rs");
 include!("decimal/i16.rs");
 include!("decimal/i32.rs");

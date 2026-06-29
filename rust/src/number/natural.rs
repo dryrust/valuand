@@ -26,6 +26,15 @@ impl Natural {
     }
 }
 
+impl<T> From<&T> for Natural
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 include!("natural/u8.rs");
 include!("natural/u16.rs");
 include!("natural/u32.rs");

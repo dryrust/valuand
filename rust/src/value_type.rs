@@ -12,10 +12,8 @@ pub enum ValueType {
     #[default]
     Unit,
     Bool,
-    I32,
-    U32,
-    I64,
-    U64,
+    #[cfg(feature = "number")]
+    Number,
     Other(TypeId),
 }
 
@@ -25,10 +23,8 @@ impl ValueType {
         match self {
             Unit => TypeId::of::<()>(),
             Bool => TypeId::of::<bool>(),
-            I32 => TypeId::of::<i32>(),
-            U32 => TypeId::of::<u32>(),
-            I64 => TypeId::of::<i64>(),
-            U64 => TypeId::of::<u64>(),
+            #[cfg(feature = "number")]
+            Number => TypeId::of::<super::Real>(),
             Other(type_id) => *type_id,
         }
     }
@@ -46,10 +42,8 @@ impl<T: Debug + 'static> From<&Value<T>> for ValueType {
         match input {
             Value::Unit => Unit,
             Value::Bool(_) => Bool,
-            Value::I32(_) => I32,
-            Value::U32(_) => U32,
-            Value::I64(_) => I64,
-            Value::U64(_) => U64,
+            #[cfg(feature = "number")]
+            Value::Number(_) => Number,
             Value::Other(x) => Other(x.type_id()),
         }
     }

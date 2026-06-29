@@ -12,15 +12,19 @@ pub struct T;
 pub enum Value<T: Debug = self::T> {
     #[default]
     Unit,
+
     Bool(bool),
-    I32(i32),
-    U32(u32),
-    I64(i64),
-    U64(u64),
+
+    #[cfg(feature = "number")]
+    Number(super::Real),
+
     Other(T),
 }
 
-impl<T: Debug + 'static> Value<T> {
+impl<T> Value<T>
+where
+    T: Debug + 'static,
+{
     pub fn r#type(&self) -> ValueType {
         self.into()
     }
@@ -30,132 +34,161 @@ impl<T: Debug + 'static> Value<T> {
     }
 }
 
-impl<T: Debug> From<()> for Value<T> {
-    fn from(_input: ()) -> Self {
-        Self::Unit
+impl<T> Value<T>
+where
+    T: Debug,
+{
+    pub fn is_unit(&self) -> bool {
+        matches!(self, Value::Unit)
     }
-}
 
-impl<T: Debug> From<bool> for Value<T> {
-    fn from(input: bool) -> Self {
-        Self::Bool(input)
+    pub fn is_bool(&self) -> bool {
+        matches!(self, Value::Bool(_))
     }
-}
 
-impl<T: Debug> From<i32> for Value<T> {
-    fn from(input: i32) -> Self {
-        Self::I32(input)
+    #[cfg(feature = "number")]
+    pub fn is_number(&self) -> bool {
+        matches!(self, Value::Number(_))
     }
-}
 
-impl<T: Debug> From<u32> for Value<T> {
-    fn from(input: u32) -> Self {
-        Self::U32(input)
+    #[cfg(all(feature = "number", feature = "decimal"))]
+    pub fn is_decimal(&self) -> bool {
+        use super::Real;
+        matches!(self, Value::Number(Real::Decimal(_)))
     }
-}
 
-impl<T: Debug> From<i64> for Value<T> {
-    fn from(input: i64) -> Self {
-        Self::I64(input)
+    #[cfg(all(feature = "number", feature = "float"))]
+    pub fn is_float(&self) -> bool {
+        use super::Real;
+        matches!(self, Value::Number(Real::Float(_)))
     }
-}
 
-impl<T: Debug> From<u64> for Value<T> {
-    fn from(input: u64) -> Self {
-        Self::U64(input)
+    #[cfg(all(feature = "number", feature = "integer"))]
+    pub fn is_integer(&self) -> bool {
+        use super::Real;
+        matches!(self, Value::Number(Real::Integer(_)))
     }
-}
 
-impl<T: Debug> From<Value<T>> for () {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
+    #[cfg(all(feature = "number", feature = "integer"))]
+    pub fn is_natural(&self) -> bool {
+        use super::Real;
+        matches!(self, Value::Number(Real::Natural(_)))
     }
-}
 
-impl<T: Debug> From<&Value<T>> for () {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::Unit => (),
-            _ => unreachable!(),
+    #[cfg(all(feature = "number", feature = "rational"))]
+    pub fn is_rational(&self) -> bool {
+        use super::Real;
+        matches!(self, Value::Number(Real::Rational(_)))
+    }
+
+    pub fn is_other(&self) -> bool {
+        matches!(self, Value::Other(_))
+    }
+
+    pub fn as_unit(&self) -> Option<()> {
+        self.to_unit()
+    }
+
+    pub fn as_bool(&self) -> Option<&bool> {
+        match self {
+            Value::Bool(value) => Some(value),
+            _ => None,
         }
     }
-}
 
-impl<T: Debug> From<Value<T>> for bool {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
-    }
-}
-
-impl<T: Debug> From<&Value<T>> for bool {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::Bool(value) => *value,
-            _ => unreachable!(),
+    #[cfg(feature = "number")]
+    pub fn as_number(&self) -> Option<&super::Real> {
+        match self {
+            Value::Number(number) => Some(number),
+            _ => None,
         }
     }
-}
 
-impl<T: Debug> From<Value<T>> for i32 {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
-    }
-}
-
-impl<T: Debug> From<&Value<T>> for i32 {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::I32(value) => *value,
-            _ => unreachable!(),
+    pub fn to_unit(&self) -> Option<()> {
+        match self {
+            Value::Unit => Some(()),
+            _ => None,
         }
     }
-}
 
-impl<T: Debug> From<Value<T>> for u32 {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
-    }
-}
-
-impl<T: Debug> From<&Value<T>> for u32 {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::U32(value) => *value,
-            _ => unreachable!(),
+    pub fn to_bool(&self) -> Option<bool> {
+        match self {
+            Value::Bool(value) => Some(*value),
+            _ => None,
         }
     }
-}
 
-impl<T: Debug> From<Value<T>> for i64 {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
-    }
-}
-
-impl<T: Debug> From<&Value<T>> for i64 {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::I32(value) => *value as _,
-            Value::U32(value) => *value as _,
-            Value::I64(value) => *value,
-            _ => unreachable!(),
+    #[cfg(feature = "number")]
+    pub fn to_number(&self) -> Option<super::Real> {
+        match self {
+            Value::Number(number) => Some(number.clone()),
+            _ => None,
         }
     }
-}
 
-impl<T: Debug> From<Value<T>> for u64 {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
-    }
-}
-
-impl<T: Debug> From<&Value<T>> for u64 {
-    fn from(input: &Value<T>) -> Self {
-        match input {
-            Value::I32(value) => *value as _,
-            Value::U32(value) => *value as _,
-            Value::U64(value) => *value,
-            _ => unreachable!(),
+    pub fn into_unit(self) -> Result<(), Self> {
+        match self {
+            Value::Unit => Ok(()),
+            _ => Err(self),
         }
     }
+
+    pub fn into_bool(self) -> Result<bool, Self> {
+        match self {
+            Value::Bool(value) => Ok(value),
+            _ => Err(self),
+        }
+    }
+
+    #[cfg(feature = "number")]
+    pub fn into_number(self) -> Result<super::Real, Self> {
+        match self {
+            Value::Number(number) => Ok(number),
+            _ => Err(self),
+        }
+    }
+
+    pub fn unwrap_unit(self) -> () {
+        self.into_unit()
+            .expect("unwrap_unit() should be called on a Value::Unit value")
+    }
+
+    pub fn unwrap_bool(self) -> bool {
+        self.into_bool()
+            .expect("unwrap_bool() should be called on a Value::Bool value")
+    }
+
+    #[cfg(feature = "number")]
+    pub fn unwrap_number(self) -> super::Real {
+        self.into_number()
+            .expect("unwrap_number() should be called on a Value::Number value")
+    }
 }
+
+impl<T, U> From<&U> for Value<T>
+where
+    T: Debug,
+    U: Clone + Into<Self>,
+{
+    fn from(t: &U) -> Self {
+        t.clone().into()
+    }
+}
+
+include!("value/unit.rs");
+include!("value/bool.rs");
+
+include!("value/f32.rs");
+include!("value/f64.rs");
+
+include!("value/i8.rs");
+include!("value/i16.rs");
+include!("value/i32.rs");
+include!("value/i64.rs");
+include!("value/i128.rs");
+
+include!("value/u8.rs");
+include!("value/u16.rs");
+include!("value/u32.rs");
+include!("value/u64.rs");
+include!("value/u128.rs");

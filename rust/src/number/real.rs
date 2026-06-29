@@ -20,6 +20,15 @@ pub enum Real {
     Rational(super::Rational),
 }
 
+impl<T> From<&T> for Real
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 #[cfg(feature = "decimal")]
 impl From<super::Decimal> for Real {
     fn from(input: super::Decimal) -> Self {

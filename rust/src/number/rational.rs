@@ -13,6 +13,15 @@ pub struct Rational {
     pub denominator: Integer,
 }
 
+impl<T> From<&T> for Rational
+where
+    T: Clone + Into<Self>,
+{
+    fn from(t: &T) -> Self {
+        t.clone().into()
+    }
+}
+
 impl From<Integer> for Rational {
     fn from(input: Integer) -> Self {
         Self {

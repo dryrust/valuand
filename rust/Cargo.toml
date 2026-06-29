@@ -13,7 +13,7 @@ homepage = "https://github.com/dryrust/valuand"
 repository = "https://github.com/dryrust/valuand"
 license = "Unlicense"
 keywords = ["value", "variant"]
-categories = ["rust-patterns", "no-std"]
+categories = ["rust-patterns", "mathematics", "no-std", "wasm"]
 publish = true
 
 [features]
@@ -23,7 +23,7 @@ alloc = []
 std = ["alloc"]
 unstable = []
 
-# The "number" feature:
+# The "number" umbrella feature:
 number = ["complex", "real"]
 complex = ["dep:num-complex"]
 decimal = ["dep:rust_decimal"]
@@ -33,11 +33,11 @@ rational = ["dep:num-rational"]
 real = ["decimal", "float", "integer", "rational"]
 
 # Interoperability:
-serde = ["dep:serde", "dep:serde_json", "rust_decimal?/serde-with-str"]
+serde = ["dep:serde", "dep:serde_json", "decorum?/serde", "rust_decimal?/serde-with-str"]
 
 [dependencies]
 
-# The "number" feature:
+# The "number" umbrella feature:
 decorum = { version = "0.4", default-features = false, optional = true }
 half = { version = "2.7", default-features = false, optional = true }
 num-bigint = { version = "0.4", default-features = false, optional = true }
