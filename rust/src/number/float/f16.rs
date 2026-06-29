@@ -3,5 +3,5 @@
 use decorum::Total;
 use half::f16;
 
-/// A 16-bit floating-point number.
+/// A totally-ordered 16-bit floating-point number.
 pub type F16 = Total<f16>;

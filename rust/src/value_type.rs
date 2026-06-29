@@ -6,7 +6,7 @@ use core::{
     fmt::Debug,
 };
 
-/// A type discriminator for a [Value].
+/// A type discriminator for a [`Value`].
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum ValueType {
     #[default]

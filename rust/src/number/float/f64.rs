@@ -2,5 +2,5 @@
 
 use decorum::Total;
 
-/// A 64-bit floating-point number.
+/// A totally-ordered 64-bit floating-point number.
 pub type F64 = Total<f64>;

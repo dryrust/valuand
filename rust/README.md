@@ -28,7 +28,7 @@
 - Implements a universal scalar value (aka variant) type for Rust.
 - Plays nice with others: interoperates with frameworks such as [Serde].
 - 100% pure and safe Rust with minimal dependencies and no bloat.
-- Supports `no_std` environments from the get-go.
+- Designed for `no_std` environment compatibility from the get-go.
 - Supports opting out of any feature using comprehensive [feature flags].
 - Adheres to the Rust API Guidelines in its [naming conventions].
 - Cuts red tape: 100% free and unencumbered public domain software.
@@ -151,12 +151,12 @@ git clone https://github.com/dryrust/valuand.git
 [Rust]: https://rust-lang.org
 [Serde]: https://serde.rs
 
-[`Complex`](https://docs.rs/valuand/latest/valuand/type.Complex.html)
-[`Decimal`](https://docs.rs/valuand/latest/valuand/struct.Decimal.html)
-[`Float`](https://docs.rs/valuand/latest/valuand/enum.Float.html)
-[`Integer`](https://docs.rs/valuand/latest/valuand/enum.Integer.html)
-[`Natural`](https://docs.rs/valuand/latest/valuand/enum.Natural.html)
-[`Rational`](https://docs.rs/valuand/latest/valuand/struct.Rational.html)
-[`Real`](https://docs.rs/valuand/latest/valuand/enum.Real.html)
-[`Value`](https://docs.rs/valuand/latest/valuand/enum.Value.html)
-[`ValueType`](https://docs.rs/valuand/latest/valuand/enum.ValueType.html)
+[`Complex`]: https://docs.rs/valuand/latest/valuand/type.Complex.html
+[`Decimal`]: https://docs.rs/valuand/latest/valuand/struct.Decimal.html
+[`Float`]: https://docs.rs/valuand/latest/valuand/enum.Float.html
+[`Integer`]: https://docs.rs/valuand/latest/valuand/enum.Integer.html
+[`Natural`]: https://docs.rs/valuand/latest/valuand/enum.Natural.html
+[`Rational`]: https://docs.rs/valuand/latest/valuand/struct.Rational.html
+[`Real`]: https://docs.rs/valuand/latest/valuand/enum.Real.html
+[`Value`]: https://docs.rs/valuand/latest/valuand/enum.Value.html
+[`ValueType`]: https://docs.rs/valuand/latest/valuand/enum.ValueType.html
