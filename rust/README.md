@@ -74,10 +74,10 @@ use valuand::{Decimal, Float, Integer, Natural, Rational, Real};
 
 ```rust,compile_fail
 match value {
-    Value::Unit() => {}
+    Value::Unit => {}
     Value::Bool(value) => {}
     Value::Number(number) => {}
-    Value::Other(t) => {}
+    Value::Other(value) => {}
 }
 ```
 
@@ -88,7 +88,7 @@ match value.r#type() {
     ValueType::Unit => {}
     ValueType::Bool => {}
     ValueType::Number => {}
-    ValueType::Other => {}
+    ValueType::Other(type_id) => {}
 }
 ```
 
@@ -145,7 +145,7 @@ git clone https://github.com/dryrust/valuand.git
 [![Share on Facebook](https://img.shields.io/badge/share%20on-fb-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/dryrust/valuand)
 [![Share on LinkedIn](https://img.shields.io/badge/share%20on-linkedin-3949AB?logo=linkedin)](https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/dryrust/valuand)
 
-[feature flags]: https://github.com/dryrust/valuand/blob/master/rust/Cargo.toml
+[feature flags]: https://docs.rs/crate/valuand/latest/features
 [naming conventions]: https://rust-lang.github.io/api-guidelines/naming.html
 
 [Rust]: https://rust-lang.org
