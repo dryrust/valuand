@@ -52,6 +52,9 @@ where
     }
 }
 
+include!("decimal/f32.rs");
+include!("decimal/f64.rs");
+
 include!("decimal/i8.rs");
 include!("decimal/i16.rs");
 include!("decimal/i32.rs");
