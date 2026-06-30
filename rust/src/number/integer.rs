@@ -41,6 +41,7 @@ include!("integer/i32.rs");
 include!("integer/i64.rs");
 include!("integer/i128.rs");
 include!("integer/i256.rs");
+include!("integer/isize.rs");
 include!("integer/big.rs");
 
 #[cfg(feature = "decimal")]

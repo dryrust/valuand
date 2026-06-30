@@ -99,21 +99,21 @@ where
     #[cfg(feature = "number")]
     pub fn as_number(&self) -> Option<&super::Real> {
         match self {
-            Value::Number(number) => Some(number),
+            Self::Number(number) => Some(number),
             _ => None,
         }
     }
 
     pub fn to_unit(&self) -> Option<()> {
         match self {
-            Value::Unit => Some(()),
+            Self::Unit => Some(()),
             _ => None,
         }
     }
 
     pub fn to_bool(&self) -> Option<bool> {
         match self {
-            Value::Bool(value) => Some(*value),
+            Self::Bool(value) => Some(*value),
             _ => None,
         }
     }
@@ -121,21 +121,21 @@ where
     #[cfg(feature = "number")]
     pub fn to_number(&self) -> Option<super::Real> {
         match self {
-            Value::Number(number) => Some(number.clone()),
+            Self::Number(number) => Some(number.clone()),
             _ => None,
         }
     }
 
     pub fn into_unit(self) -> Result<(), Self> {
         match self {
-            Value::Unit => Ok(()),
+            Self::Unit => Ok(()),
             _ => Err(self),
         }
     }
 
     pub fn into_bool(self) -> Result<bool, Self> {
         match self {
-            Value::Bool(value) => Ok(value),
+            Self::Bool(value) => Ok(value),
             _ => Err(self),
         }
     }
@@ -143,7 +143,7 @@ where
     #[cfg(feature = "number")]
     pub fn into_number(self) -> Result<super::Real, Self> {
         match self {
-            Value::Number(number) => Ok(number),
+            Self::Number(number) => Ok(number),
             _ => Err(self),
         }
     }

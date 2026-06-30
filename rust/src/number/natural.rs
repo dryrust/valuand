@@ -41,6 +41,7 @@ include!("natural/u32.rs");
 include!("natural/u64.rs");
 include!("natural/u128.rs");
 include!("natural/u256.rs");
+include!("natural/usize.rs");
 include!("natural/big.rs");
 
 #[cfg(feature = "decimal")]

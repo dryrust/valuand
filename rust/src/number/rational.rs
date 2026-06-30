@@ -51,3 +51,5 @@ include!("rational/i16.rs");
 include!("rational/i32.rs");
 include!("rational/i64.rs");
 include!("rational/i128.rs");
+include!("rational/i256.rs");
+include!("rational/isize.rs");
