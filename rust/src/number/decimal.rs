@@ -68,6 +68,8 @@ include!("decimal/u128.rs");
 include!("decimal/u256.rs");
 include!("decimal/usize.rs");
 
+include!("decimal/str.rs");
+
 impl From<rust_decimal::Decimal> for Decimal {
     fn from(input: rust_decimal::Decimal) -> Self {
         Self(input)

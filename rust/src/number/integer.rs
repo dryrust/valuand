@@ -54,6 +54,8 @@ include!("integer/i256.rs");
 include!("integer/isize.rs");
 include!("integer/big.rs");
 
+include!("integer/str.rs");
+
 #[cfg(feature = "decimal")]
 impl From<Integer> for rust_decimal::Decimal {
     fn from(input: Integer) -> Self {

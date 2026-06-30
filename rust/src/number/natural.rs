@@ -54,6 +54,8 @@ include!("natural/u256.rs");
 include!("natural/usize.rs");
 include!("natural/big.rs");
 
+include!("natural/str.rs");
+
 #[cfg(feature = "decimal")]
 impl From<Natural> for rust_decimal::Decimal {
     fn from(input: Natural) -> Self {
