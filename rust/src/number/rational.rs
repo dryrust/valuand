@@ -8,6 +8,10 @@ pub type Rat = Rational;
 /// A rational number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 pub struct Rational {
     pub numerator: Integer,
     pub denominator: Integer,
@@ -16,6 +20,34 @@ pub struct Rational {
 impl Rational {
     pub fn is_zero(&self) -> bool {
         self.numerator.is_zero()
+    }
+
+    #[cfg(feature = "serde")]
+    pub fn to_json(&self) -> Option<serde_json::Value> {
+        self.clone().into_json().ok()
+    }
+
+    #[cfg(feature = "serde")]
+    pub fn into_json(self) -> Result<serde_json::Value, Self> {
+        use alloc::string::ToString;
+        Ok(serde_json::Value::String(self.to_string()))
+    }
+
+    #[cfg(feature = "bson")]
+    pub fn to_bson(&self) -> Option<bson::Bson> {
+        self.clone().into_bson().ok()
+    }
+
+    #[cfg(feature = "bson")]
+    pub fn into_bson(self) -> Result<bson::Bson, Self> {
+        use alloc::string::ToString;
+        Ok(bson::Bson::String(self.to_string())) // TODO: Bson::Decimal128
+    }
+}
+
+impl core::fmt::Display for Rational {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        write!(f, "{}/{}", self.numerator, self.denominator)
     }
 }
 

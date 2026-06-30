@@ -38,6 +38,19 @@ impl<T> Value<T>
 where
     T: Debug,
 {
+    pub const fn unit() -> Self {
+        Self::Unit
+    }
+
+    pub fn bool(value: impl Into<bool>) -> Self {
+        Self::Bool(value.into())
+    }
+
+    #[cfg(feature = "number")]
+    pub fn number(value: impl Into<super::Real>) -> Self {
+        Self::Number(value.into())
+    }
+
     pub fn is_unit(&self) -> bool {
         matches!(self, Value::Unit)
     }

@@ -3,6 +3,10 @@
 /// A real number.
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 pub enum Real {
     #[cfg(feature = "decimal")]
     Decimal(super::Decimal),
@@ -138,6 +142,65 @@ impl Real {
         match self {
             Self::Rational(q) => Ok(q),
             _ => Err(self),
+        }
+    }
+
+    #[cfg(feature = "serde")]
+    pub fn to_json(&self) -> Option<serde_json::Value> {
+        self.clone().into_json().ok()
+    }
+
+    #[cfg(feature = "serde")]
+    pub fn into_json(self) -> Result<serde_json::Value, Self> {
+        match self {
+            #[cfg(feature = "decimal")]
+            Self::Decimal(r) => r.into_json().map_err(Self::Decimal),
+            #[cfg(feature = "float")]
+            Self::Float(_r) => todo!(), // TODO: r.into_json().map_err(Self::Float),
+            #[cfg(feature = "integer")]
+            Self::Integer(z) => z.into_json().map_err(Self::Integer),
+            #[cfg(feature = "integer")]
+            Self::Natural(n) => n.into_json().map_err(Self::Natural),
+            #[cfg(feature = "rational")]
+            Self::Rational(q) => q.into_json().map_err(Self::Rational),
+        }
+    }
+
+    #[cfg(feature = "bson")]
+    pub fn to_bson(&self) -> Option<bson::Bson> {
+        self.clone().into_bson().ok()
+    }
+
+    #[cfg(feature = "bson")]
+    pub fn into_bson(self) -> Result<bson::Bson, Self> {
+        match self {
+            #[cfg(feature = "decimal")]
+            Self::Decimal(r) => r.into_bson().map_err(Self::Decimal),
+            #[cfg(feature = "float")]
+            Self::Float(_r) => todo!(), // TODO: r.into_bson().map_err(Self::Float),
+            #[cfg(feature = "integer")]
+            Self::Integer(z) => z.into_bson().map_err(Self::Integer),
+            #[cfg(feature = "integer")]
+            Self::Natural(n) => n.into_bson().map_err(Self::Natural),
+            #[cfg(feature = "rational")]
+            Self::Rational(q) => q.into_bson().map_err(Self::Rational),
+        }
+    }
+}
+
+impl core::fmt::Display for Real {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self {
+            #[cfg(feature = "decimal")]
+            Self::Decimal(r) => r.fmt(f),
+            #[cfg(feature = "float")]
+            Self::Float(r) => core::fmt::Debug::fmt(&r, f),
+            #[cfg(feature = "integer")]
+            Self::Integer(z) => z.fmt(f),
+            #[cfg(feature = "integer")]
+            Self::Natural(n) => n.fmt(f),
+            #[cfg(feature = "rational")]
+            Self::Rational(q) => q.fmt(f),
         }
     }
 }
