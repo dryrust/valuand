@@ -13,6 +13,12 @@ pub struct Rational {
     pub denominator: Integer,
 }
 
+impl Rational {
+    pub fn is_zero(&self) -> bool {
+        self.numerator.is_zero()
+    }
+}
+
 impl<T> From<&T> for Rational
 where
     T: Clone + Into<Self>,

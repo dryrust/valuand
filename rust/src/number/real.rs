@@ -21,6 +21,21 @@ pub enum Real {
 }
 
 impl Real {
+    pub fn is_zero(&self) -> bool {
+        match self {
+            #[cfg(feature = "decimal")]
+            Self::Decimal(r) => r.is_zero(),
+            #[cfg(feature = "float")]
+            Self::Float(r) => r.is_zero(),
+            #[cfg(feature = "integer")]
+            Self::Integer(z) => z.is_zero(),
+            #[cfg(feature = "integer")]
+            Self::Natural(n) => n.is_zero(),
+            #[cfg(feature = "rational")]
+            Self::Rational(q) => q.is_zero(),
+        }
+    }
+
     #[cfg(feature = "decimal")]
     pub fn is_decimal(&self) -> bool {
         matches!(self, Real::Decimal(_))

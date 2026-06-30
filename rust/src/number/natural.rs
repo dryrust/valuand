@@ -15,6 +15,16 @@ pub enum Natural {
 }
 
 impl Natural {
+    pub fn is_zero(&self) -> bool {
+        match self {
+            Self::U8(i) => *i == 0,
+            Self::U16(i) => *i == 0,
+            Self::U32(i) => *i == 0,
+            Self::U64(i) => *i == 0,
+            Self::U128(i) => *i == 0,
+        }
+    }
+
     pub fn as_u128(&self) -> u128 {
         match self {
             Self::U8(i) => *i as _,

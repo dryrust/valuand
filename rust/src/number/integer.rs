@@ -15,6 +15,16 @@ pub enum Integer {
 }
 
 impl Integer {
+    pub fn is_zero(&self) -> bool {
+        match self {
+            Self::I8(i) => *i == 0,
+            Self::I16(i) => *i == 0,
+            Self::I32(i) => *i == 0,
+            Self::I64(i) => *i == 0,
+            Self::I128(i) => *i == 0,
+        }
+    }
+
     pub fn as_i128(&self) -> i128 {
         match self {
             Self::I8(i) => *i as _,

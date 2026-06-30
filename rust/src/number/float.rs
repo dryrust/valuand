@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 use decorum::Total;
+use num_traits::identities::Zero;
 
 /// A floating-point number.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -12,6 +13,13 @@ pub enum Float {
 }
 
 impl Float {
+    pub fn is_zero(&self) -> bool {
+        match self {
+            Float::F32(f) => f.is_zero(),
+            Float::F64(f) => f.is_zero(),
+        }
+    }
+
     pub fn as_f32(&self) -> f32 {
         match self {
             Float::F32(f) => f.into_inner(),

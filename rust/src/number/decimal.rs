@@ -13,6 +13,10 @@ pub struct Decimal(
 );
 
 impl Decimal {
+    pub fn is_zero(&self) -> bool {
+        self.0.is_zero()
+    }
+
     pub fn is_integer(&self) -> bool {
         return self.0.as_f64().fract() == 0.0;
     }
