@@ -6,6 +6,9 @@
 #![forbid(unsafe_code)]
 #![allow(unused_imports)]
 
+mod bool;
+pub use bool::*;
+
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
