@@ -1,5 +1,6 @@
 // This is free and unencumbered software released into the public domain.
 
+use super::{Integer, Natural};
 use num_traits::One;
 use rust_decimal::prelude::ToPrimitive;
 
@@ -42,6 +43,10 @@ impl Decimal {
 
     pub fn is_integer(&self) -> bool {
         self.0.is_integer()
+    }
+
+    pub fn as_bool(&self) -> bool {
+        !self.is_zero()
     }
 
     pub fn as_f32(&self) -> f32 {
@@ -143,6 +148,18 @@ where
 {
     fn from(t: &T) -> Self {
         t.clone().into()
+    }
+}
+
+impl From<Integer> for Decimal {
+    fn from(input: Integer) -> Self {
+        Self(input.as_i128().into())
+    }
+}
+
+impl From<Natural> for Decimal {
+    fn from(input: Natural) -> Self {
+        Self(input.as_u128().into())
     }
 }
 

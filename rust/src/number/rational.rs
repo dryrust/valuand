@@ -1,6 +1,6 @@
 // This is free and unencumbered software released into the public domain.
 
-use super::Integer;
+use super::{Integer, Natural};
 
 /// A shorthand type alias for [`Rational`].
 pub type Rat = Rational;
@@ -13,12 +13,12 @@ pub type Rat = Rational;
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
 pub struct Rational {
-    pub numerator: Integer,
-    pub denominator: Integer,
+    numerator: Integer,
+    denominator: Integer, // TODO: NonZero
 }
 
 impl Rational {
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         self.numerator.is_zero()
     }
 

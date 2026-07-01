@@ -19,24 +19,144 @@ pub enum Natural {
 }
 
 impl Natural {
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         match self {
-            Self::U8(i) => *i == 0,
-            Self::U16(i) => *i == 0,
-            Self::U32(i) => *i == 0,
-            Self::U64(i) => *i == 0,
-            Self::U128(i) => *i == 0,
+            Self::U8(n) => *n == 0,
+            Self::U16(n) => *n == 0,
+            Self::U32(n) => *n == 0,
+            Self::U64(n) => *n == 0,
+            Self::U128(n) => *n == 0,
         }
     }
 
-    pub fn as_u128(&self) -> u128 {
+    pub const fn is_one(&self) -> bool {
         match self {
-            Self::U8(i) => *i as _,
-            Self::U16(i) => *i as _,
-            Self::U32(i) => *i as _,
-            Self::U64(i) => *i as _,
-            Self::U128(i) => *i,
+            Self::U8(n) => *n == 1,
+            Self::U16(n) => *n == 1,
+            Self::U32(n) => *n == 1,
+            Self::U64(n) => *n == 1,
+            Self::U128(n) => *n == 1,
         }
+    }
+
+    pub const fn as_bool(&self) -> bool {
+        !self.is_zero()
+    }
+
+    pub const fn as_f32(&self) -> f32 {
+        match self {
+            Self::U8(n) => *n as _,
+            Self::U16(n) => *n as _,
+            Self::U32(n) => *n as _,
+            Self::U64(n) => *n as _,
+            Self::U128(n) => *n as _,
+        }
+    }
+
+    pub const fn as_f64(&self) -> f64 {
+        match self {
+            Self::U8(n) => *n as _,
+            Self::U16(n) => *n as _,
+            Self::U32(n) => *n as _,
+            Self::U64(n) => *n as _,
+            Self::U128(n) => *n as _,
+        }
+    }
+
+    #[allow(dead_code)]
+    pub(crate) fn as_u8(&self) -> u8 {
+        self.to_u8().unwrap()
+    }
+
+    #[allow(dead_code)]
+    pub(crate) fn as_u16(&self) -> u16 {
+        self.to_u16().unwrap()
+    }
+
+    #[allow(dead_code)]
+    pub(crate) fn as_u32(&self) -> u32 {
+        self.to_u32().unwrap()
+    }
+
+    #[allow(dead_code)]
+    pub(crate) fn as_u64(&self) -> u64 {
+        self.to_u64().unwrap()
+    }
+
+    pub(crate) const fn as_u128(&self) -> u128 {
+        match self {
+            Self::U8(n) => *n as _,
+            Self::U16(n) => *n as _,
+            Self::U32(n) => *n as _,
+            Self::U64(n) => *n as _,
+            Self::U128(n) => *n,
+        }
+    }
+
+    pub const fn to_bool(&self) -> Option<bool> {
+        Some(self.as_bool())
+    }
+
+    pub const fn to_f32(&self) -> Option<f32> {
+        Some(self.as_f32())
+    }
+
+    pub const fn to_f64(&self) -> Option<f64> {
+        Some(self.as_f64())
+    }
+
+    pub const fn to_u8(&self) -> Option<u8> {
+        match self {
+            Self::U8(n) => Some(*n as _),
+            Self::U16(n) if *n > u8::MAX as u16 => None,
+            Self::U16(n) => Some(*n as _),
+            Self::U32(n) if *n > u8::MAX as u32 => None,
+            Self::U32(n) => Some(*n as _),
+            Self::U64(n) if *n > u8::MAX as u64 => None,
+            Self::U64(n) => Some(*n as _),
+            Self::U128(n) if *n > u8::MAX as u128 => None,
+            Self::U128(n) => Some(*n as _),
+        }
+    }
+
+    pub const fn to_u16(&self) -> Option<u16> {
+        match self {
+            Self::U8(n) => Some(*n as _),
+            Self::U16(n) => Some(*n as _),
+            Self::U32(n) if *n > u16::MAX as u32 => None,
+            Self::U32(n) => Some(*n as _),
+            Self::U64(n) if *n > u16::MAX as u64 => None,
+            Self::U64(n) => Some(*n as _),
+            Self::U128(n) if *n > u16::MAX as u128 => None,
+            Self::U128(n) => Some(*n as _),
+        }
+    }
+
+    pub const fn to_u32(&self) -> Option<u32> {
+        match self {
+            Self::U8(n) => Some(*n as _),
+            Self::U16(n) => Some(*n as _),
+            Self::U32(n) => Some(*n as _),
+            Self::U64(n) if *n > u32::MAX as u64 => None,
+            Self::U64(n) => Some(*n as _),
+            Self::U128(n) if *n > u32::MAX as u128 => None,
+            Self::U128(n) => Some(*n as _),
+        }
+    }
+
+    pub const fn to_u64(&self) -> Option<u64> {
+        match self {
+            Self::U8(n) => Some(*n as _),
+            Self::U16(n) => Some(*n as _),
+            Self::U32(n) => Some(*n as _),
+            Self::U64(n) => Some(*n as _),
+            Self::U128(n) if *n > u64::MAX as u128 => None,
+            Self::U128(n) => Some(*n as _),
+        }
+    }
+
+    pub const fn to_u128(&self) -> Option<u128> {
+        Some(self.as_u128())
     }
 
     #[cfg(feature = "serde")]
@@ -49,11 +169,11 @@ impl Natural {
         use alloc::string::ToString;
         use serde_json::{Number, Value};
         Ok(serde_json::Value::Number(match self {
-            Self::U8(z) => z.into(),
-            Self::U16(z) => z.into(),
-            Self::U32(z) => z.into(),
-            Self::U64(z) => z.into(), // TODO: z > max
-            Self::U128(z) => return Ok(serde_json::Value::String(z.to_string())),
+            Self::U8(n) => n.into(),
+            Self::U16(n) => n.into(),
+            Self::U32(n) => n.into(),
+            Self::U64(n) => n.into(), // TODO: z > max
+            Self::U128(n) => return Ok(serde_json::Value::String(n.to_string())),
         }))
     }
 
@@ -108,7 +228,7 @@ include!("natural/big.rs");
 
 include!("natural/str.rs");
 
-#[cfg(feature = "decimal")]
+#[cfg(all(feature = "decimal", feature = "rust_decimal"))]
 impl From<Natural> for rust_decimal::Decimal {
     fn from(input: Natural) -> Self {
         input.into()

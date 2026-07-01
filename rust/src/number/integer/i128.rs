@@ -6,8 +6,18 @@ impl From<i128> for Integer {
     }
 }
 
-impl From<Integer> for i128 {
-    fn from(input: Integer) -> Self {
-        input.as_i128()
+impl TryFrom<Integer> for i128 {
+    type Error = ();
+
+    fn try_from(input: Integer) -> Result<Self, Self::Error> {
+        Self::try_from(&input)
+    }
+}
+
+impl TryFrom<&Integer> for i128 {
+    type Error = ();
+
+    fn try_from(input: &Integer) -> Result<Self, Self::Error> {
+        input.to_i128().ok_or(())
     }
 }

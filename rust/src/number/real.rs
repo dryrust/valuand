@@ -25,7 +25,7 @@ pub enum Real {
 }
 
 impl Real {
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         match self {
             #[cfg(feature = "decimal")]
             Self::Decimal(r) => r.is_zero(),
@@ -41,27 +41,27 @@ impl Real {
     }
 
     #[cfg(feature = "decimal")]
-    pub fn is_decimal(&self) -> bool {
+    pub const fn is_decimal(&self) -> bool {
         matches!(self, Real::Decimal(_))
     }
 
     #[cfg(feature = "float")]
-    pub fn is_float(&self) -> bool {
+    pub const fn is_float(&self) -> bool {
         matches!(self, Real::Float(_))
     }
 
     #[cfg(feature = "integer")]
-    pub fn is_integer(&self) -> bool {
+    pub const fn is_integer(&self) -> bool {
         matches!(self, Real::Integer(_))
     }
 
     #[cfg(feature = "integer")]
-    pub fn is_natural(&self) -> bool {
+    pub const fn is_natural(&self) -> bool {
         matches!(self, Real::Natural(_))
     }
 
     #[cfg(feature = "rational")]
-    pub fn is_rational(&self) -> bool {
+    pub const fn is_rational(&self) -> bool {
         matches!(self, Real::Rational(_))
     }
 
@@ -106,7 +106,7 @@ impl Real {
     }
 
     #[cfg(feature = "decimal")]
-    pub fn into_decimal(self) -> Result<super::Decimal, Self> {
+    pub const fn into_decimal(self) -> Result<super::Decimal, Self> {
         match self {
             Self::Decimal(r) => Ok(r),
             _ => Err(self),
@@ -114,7 +114,7 @@ impl Real {
     }
 
     #[cfg(feature = "float")]
-    pub fn into_float(self) -> Result<super::Float, Self> {
+    pub const fn into_float(self) -> Result<super::Float, Self> {
         match self {
             Self::Float(r) => Ok(r),
             _ => Err(self),
@@ -122,7 +122,7 @@ impl Real {
     }
 
     #[cfg(feature = "integer")]
-    pub fn into_integer(self) -> Result<super::Integer, Self> {
+    pub const fn into_integer(self) -> Result<super::Integer, Self> {
         match self {
             Self::Integer(z) => Ok(z),
             _ => Err(self),
@@ -130,7 +130,7 @@ impl Real {
     }
 
     #[cfg(feature = "integer")]
-    pub fn into_natural(self) -> Result<super::Natural, Self> {
+    pub const fn into_natural(self) -> Result<super::Natural, Self> {
         match self {
             Self::Natural(n) => Ok(n),
             _ => Err(self),
@@ -138,7 +138,7 @@ impl Real {
     }
 
     #[cfg(feature = "rational")]
-    pub fn into_rational(self) -> Result<super::Rational, Self> {
+    pub const fn into_rational(self) -> Result<super::Rational, Self> {
         match self {
             Self::Rational(q) => Ok(q),
             _ => Err(self),

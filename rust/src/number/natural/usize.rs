@@ -6,8 +6,18 @@ impl From<usize> for Natural {
     }
 }
 
-impl From<Natural> for usize {
-    fn from(input: Natural) -> Self {
-        input.as_u128() as _
+impl TryFrom<Natural> for usize {
+    type Error = ();
+
+    fn try_from(input: Natural) -> Result<Self, Self::Error> {
+        Self::try_from(&input)
+    }
+}
+
+impl TryFrom<&Natural> for usize {
+    type Error = ();
+
+    fn try_from(input: &Natural) -> Result<Self, Self::Error> {
+        input.to_u128().ok_or(()).map(|n| n as _)
     }
 }

@@ -9,15 +9,27 @@ use decorum::Total;
 pub struct F32(Total<f32>);
 
 impl F32 {
-    pub fn as_f32(&self) -> f32 {
+    pub const fn is_zero(&self) -> bool {
+        self.0.into_inner() == 0.0
+    }
+
+    pub const fn is_one(&self) -> bool {
+        self.0.into_inner() == 1.0
+    }
+
+    pub const fn as_bool(&self) -> bool {
+        !self.is_zero()
+    }
+
+    pub const fn as_f32(&self) -> f32 {
         self.0.into_inner()
     }
 
-    pub fn as_f64(&self) -> f64 {
+    pub const fn as_f64(&self) -> f64 {
         self.0.into_inner() as _
     }
 
-    pub fn into_inner(self) -> f32 {
+    pub const fn into_inner(self) -> f32 {
         self.0.into_inner()
     }
 

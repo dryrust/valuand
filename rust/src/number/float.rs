@@ -14,21 +14,32 @@ pub enum Float {
 }
 
 impl Float {
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         match self {
-            Float::F32(f) => f.into_inner().is_zero(),
-            Float::F64(f) => f.into_inner().is_zero(),
+            Float::F32(f) => f.is_zero(),
+            Float::F64(f) => f.is_zero(),
         }
     }
 
-    pub fn as_f32(&self) -> f32 {
+    pub const fn is_one(&self) -> bool {
+        match self {
+            Float::F32(f) => f.is_one(),
+            Float::F64(f) => f.is_one(),
+        }
+    }
+
+    pub const fn as_bool(&self) -> bool {
+        !self.is_zero()
+    }
+
+    pub const fn as_f32(&self) -> f32 {
         match self {
             Float::F32(f) => f.into_inner(),
             Float::F64(f) => f.into_inner() as _,
         }
     }
 
-    pub fn as_f64(&self) -> f64 {
+    pub const fn as_f64(&self) -> f64 {
         match self {
             Float::F32(f) => f.into_inner() as _,
             Float::F64(f) => f.into_inner(),
