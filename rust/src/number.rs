@@ -11,6 +11,21 @@ mod decimal;
 pub use decimal::*;
 
 #[cfg(feature = "float")]
+mod f16;
+#[cfg(feature = "float")]
+pub use f16::*;
+
+#[cfg(feature = "float")]
+mod f32;
+#[cfg(feature = "float")]
+pub use f32::*;
+
+#[cfg(feature = "float")]
+mod f64;
+#[cfg(feature = "float")]
+pub use f64::*;
+
+#[cfg(feature = "float")]
 mod float;
 #[cfg(feature = "float")]
 pub use float::*;

@@ -1,6 +1,13 @@
 // This is free and unencumbered software released into the public domain.
 
-use decorum::Total;
+impl From<f64> for Float {
+    fn from(input: f64) -> Self {
+        Self::F64(input.into())
+    }
+}
 
-/// A totally-ordered 64-bit floating-point number.
-pub type F64 = Total<f64>;
+impl From<Total<f64>> for Float {
+    fn from(input: Total<f64>) -> Self {
+        Self::F64(input.into())
+    }
+}

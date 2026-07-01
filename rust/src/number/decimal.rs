@@ -8,10 +8,6 @@ pub type Dec = Decimal;
 /// A decimal number.
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[cfg_attr(
-    feature = "borsh",
-    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
-)]
 pub struct Decimal(
     #[cfg_attr(feature = "serde", serde(with = "rust_decimal::serde::str"))] rust_decimal::Decimal,
 );
@@ -98,6 +94,8 @@ include!("decimal/u256.rs");
 include!("decimal/usize.rs");
 
 include!("decimal/str.rs");
+
+include!("decimal/borsh.rs");
 
 impl From<rust_decimal::Decimal> for Decimal {
     fn from(input: rust_decimal::Decimal) -> Self {
