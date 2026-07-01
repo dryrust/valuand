@@ -12,8 +12,8 @@ readme = true
 homepage = "https://github.com/dryrust/valuand"
 repository = "https://github.com/dryrust/valuand"
 license = "Unlicense"
-keywords = ["value", "variant"]
-categories = ["rust-patterns", "mathematics", "no-std", "wasm"]
+keywords = ["value", "variant", "bigint", "bigdecimal"]
+categories = ["rust-patterns", "data-structures", "mathematics", "no-std", "wasm"]
 publish = true
 
 [features]
