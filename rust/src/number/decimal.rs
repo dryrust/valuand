@@ -1,5 +1,6 @@
 // This is free and unencumbered software released into the public domain.
 
+use num_traits::One;
 use rust_decimal::prelude::ToPrimitive;
 
 /// A shorthand type alias for [`Decimal`].
@@ -13,8 +14,28 @@ pub struct Decimal(
 );
 
 impl Decimal {
-    pub fn is_zero(&self) -> bool {
+    pub const ZERO: Self = Self(rust_decimal::Decimal::ZERO);
+    pub const ONE: Self = Self(rust_decimal::Decimal::ONE);
+    pub const TWO: Self = Self(rust_decimal::Decimal::TWO);
+    pub const TEN: Self = Self(rust_decimal::Decimal::TEN);
+
+    pub const PI: Self = Self(rust_decimal::Decimal::PI);
+    pub const HALF_PI: Self = Self(rust_decimal::Decimal::HALF_PI);
+
+    pub const fn is_zero(&self) -> bool {
         self.0.is_zero()
+    }
+
+    pub fn is_one(&self) -> bool {
+        self.0.is_one()
+    }
+
+    pub fn is_sign_negative(&self) -> bool {
+        self.0.is_sign_negative()
+    }
+
+    pub fn is_sign_positive(&self) -> bool {
+        self.0.is_sign_positive()
     }
 
     pub fn is_integer(&self) -> bool {

@@ -18,7 +18,7 @@ publish = true
 
 [features]
 default = ["all", "std"]
-all = ["number"]
+all = ["number", "math"]
 alloc = []
 std = ["alloc"]
 unstable = []
@@ -31,6 +31,9 @@ float = ["dep:decorum", "dep:half", "dep:num-traits"]
 integer = ["dep:num-bigint", "dep:num-integer"]
 rational = ["dep:num-rational"]
 real = ["decimal", "float", "integer", "rational"]
+
+# Features:
+math = ["dep:num-traits", "rust_decimal?/maths"]
 
 # Interoperability:
 borsh = ["dep:borsh"]
