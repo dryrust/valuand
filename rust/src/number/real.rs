@@ -221,7 +221,7 @@ impl From<super::Decimal> for Real {
     }
 }
 
-#[cfg(feature = "decimal")]
+#[cfg(all(feature = "decimal", feature = "rust_decimal"))]
 impl From<rust_decimal::Decimal> for Real {
     fn from(input: rust_decimal::Decimal) -> Self {
         Self::Decimal(input.into())

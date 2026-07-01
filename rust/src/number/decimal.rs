@@ -18,22 +18,71 @@ impl Decimal {
     }
 
     pub fn is_integer(&self) -> bool {
-        return self.0.as_f64().fract() == 0.0;
+        self.0.is_integer()
+    }
+
+    pub fn as_f32(&self) -> f32 {
+        self.0.as_f64() as _
     }
 
     pub fn as_f64(&self) -> f64 {
-        return self.0.as_f64();
+        self.0.as_f64()
+    }
+
+    pub fn to_f32(&self) -> Option<f32> {
+        self.0.to_f32()
     }
 
     pub fn to_f64(&self) -> Option<f64> {
-        Some(self.as_f64())
+        self.0.to_f64()
+    }
+
+    pub fn to_i8(&self) -> Option<i8> {
+        self.0.to_i8()
+    }
+
+    pub fn to_i16(&self) -> Option<i16> {
+        self.0.to_i16()
+    }
+
+    pub fn to_i32(&self) -> Option<i32> {
+        self.0.to_i32()
+    }
+
+    pub fn to_i64(&self) -> Option<i64> {
+        self.0.to_i64()
     }
 
     pub fn to_i128(&self) -> Option<i128> {
-        if !self.is_integer() {
-            return None;
-        }
-        return self.0.to_i128();
+        self.0.to_i128()
+    }
+
+    pub fn to_isize(&self) -> Option<isize> {
+        self.0.to_isize()
+    }
+
+    pub fn to_u8(&self) -> Option<u8> {
+        self.0.to_u8()
+    }
+
+    pub fn to_u16(&self) -> Option<u16> {
+        self.0.to_u16()
+    }
+
+    pub fn to_u32(&self) -> Option<u32> {
+        self.0.to_u32()
+    }
+
+    pub fn to_u64(&self) -> Option<u64> {
+        self.0.to_u64()
+    }
+
+    pub fn to_u128(&self) -> Option<u128> {
+        self.0.to_u128()
+    }
+
+    pub fn to_usize(&self) -> Option<usize> {
+        self.0.to_usize()
     }
 
     #[cfg(feature = "serde")]
@@ -96,15 +145,5 @@ include!("decimal/usize.rs");
 include!("decimal/str.rs");
 
 include!("decimal/borsh.rs");
-
-impl From<rust_decimal::Decimal> for Decimal {
-    fn from(input: rust_decimal::Decimal) -> Self {
-        Self(input)
-    }
-}
-
-impl From<Decimal> for rust_decimal::Decimal {
-    fn from(input: Decimal) -> Self {
-        input.0
-    }
-}
+include!("decimal/bson.rs");
+include!("decimal/rust_decimal.rs");

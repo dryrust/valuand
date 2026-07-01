@@ -7,3 +7,19 @@ impl TryFrom<f64> for Decimal {
         Ok(Self(rust_decimal::Decimal::try_from(input)?))
     }
 }
+
+impl TryFrom<Decimal> for f64 {
+    type Error = ();
+
+    fn try_from(input: Decimal) -> Result<Self, Self::Error> {
+        Self::try_from(&input)
+    }
+}
+
+impl TryFrom<&Decimal> for f64 {
+    type Error = ();
+
+    fn try_from(input: &Decimal) -> Result<Self, Self::Error> {
+        input.to_f64().ok_or(())
+    }
+}

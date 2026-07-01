@@ -35,6 +35,7 @@ real = ["decimal", "float", "integer", "rational"]
 # Interoperability:
 borsh = ["dep:borsh"]
 bson = ["dep:bson"]
+rust_decimal = ["dep:rust_decimal"]
 serde = ["dep:serde", "dep:serde_json", "decorum?/serde", "rust_decimal?/serde-with-str"]
 
 [dependencies]
