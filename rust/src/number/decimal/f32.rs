@@ -1,10 +1,12 @@
 // This is free and unencumbered software released into the public domain.
 
 impl TryFrom<f32> for Decimal {
-    type Error = rust_decimal::Error;
+    type Error = crate::DecimalError;
 
     fn try_from(input: f32) -> Result<Self, Self::Error> {
-        Ok(Self(rust_decimal::Decimal::try_from(input)?))
+        Ok(Self(
+            rust_decimal::Decimal::try_from(input).map_err(crate::DecimalError::from)?,
+        ))
     }
 }
 

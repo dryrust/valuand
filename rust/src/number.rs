@@ -10,6 +10,11 @@ mod decimal;
 #[cfg(feature = "decimal")]
 pub use decimal::*;
 
+#[cfg(feature = "decimal")]
+mod decimal_error;
+#[cfg(feature = "decimal")]
+pub use decimal_error::*;
+
 #[cfg(feature = "float")]
 mod f16;
 #[cfg(feature = "float")]

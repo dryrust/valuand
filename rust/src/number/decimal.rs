@@ -19,7 +19,9 @@ impl Decimal {
     pub const TWO: Self = Self(rust_decimal::Decimal::TWO);
     pub const TEN: Self = Self(rust_decimal::Decimal::TEN);
 
+    #[cfg(feature = "math")]
     pub const PI: Self = Self(rust_decimal::Decimal::PI);
+    #[cfg(feature = "math")]
     pub const HALF_PI: Self = Self(rust_decimal::Decimal::HALF_PI);
 
     pub const fn is_zero(&self) -> bool {

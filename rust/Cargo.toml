@@ -32,7 +32,7 @@ integer = ["dep:num-bigint", "dep:num-integer"]
 rational = ["dep:num-rational"]
 real = ["decimal", "float", "integer", "rational"]
 
-# Features:
+# The "math" umbrella feature:
 math = ["dep:num-traits", "rust_decimal?/maths"]
 
 # Interoperability:
