@@ -18,6 +18,8 @@ pub enum Scalar<T: Debug = self::T> {
     #[cfg(feature = "number")]
     Number(super::Real),
 
+    Char(char),
+
     Other(T),
 }
 

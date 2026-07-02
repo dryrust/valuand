@@ -7,9 +7,6 @@
 #![allow(unused_imports)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-mod bool;
-pub use bool::*;
-
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
@@ -20,6 +17,12 @@ extern crate std;
 mod any_scalar;
 #[cfg(feature = "alloc")]
 pub use any_scalar::*;
+
+mod bool;
+pub use bool::*;
+
+mod char;
+pub use char::*;
 
 #[cfg(feature = "number")]
 mod number;

@@ -11,9 +11,14 @@ use core::{
 pub enum ScalarType {
     #[default]
     Unit,
+
     Bool,
+
     #[cfg(feature = "number")]
     Number,
+
+    Char,
+
     Other(TypeId),
 }
 
@@ -25,6 +30,7 @@ impl ScalarType {
             Bool => TypeId::of::<bool>(),
             #[cfg(feature = "number")]
             Number => TypeId::of::<super::Real>(),
+            Char => TypeId::of::<char>(),
             Other(type_id) => *type_id,
         }
     }
@@ -44,6 +50,7 @@ impl<T: Debug + 'static> From<&Scalar<T>> for ScalarType {
             Scalar::Bool(_) => Bool,
             #[cfg(feature = "number")]
             Scalar::Number(_) => Number,
+            Scalar::Char(_) => Char,
             Scalar::Other(x) => Other(x.type_id()),
         }
     }

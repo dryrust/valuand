@@ -77,6 +77,7 @@ match value {
     Scalar::Unit => {}
     Scalar::Bool(value) => {}
     Scalar::Number(number) => {}
+    Scalar::Char(value) => {}
     Scalar::Other(value) => {}
 }
 ```
@@ -88,6 +89,7 @@ match value.r#type() {
     ScalarType::Unit => {}
     ScalarType::Bool => {}
     ScalarType::Number => {}
+    ScalarType::Char => {}
     ScalarType::Other(type_id) => {}
 }
 ```
@@ -108,7 +110,7 @@ match value.as_number().unwrap() {
 
 [docs.rs/valuand](https://docs.rs/valuand)
 
-### Scalar Type
+### Variant Type
 
 - [`Scalar`]
 - [`ScalarType`]
