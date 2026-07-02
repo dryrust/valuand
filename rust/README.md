@@ -32,6 +32,7 @@
 - Supports opting out of any feature using comprehensive [feature flags].
 - Adheres to the Rust API Guidelines in its [naming conventions].
 - Cuts red tape: 100% free and unencumbered public domain software.
+- Polyglot software also available for Dart, Python, Ruby, and TypeScript.
 
 ## 🛠️ Prerequisites
 
@@ -51,14 +52,14 @@ Enable all default features:
 
 ```toml
 [dependencies]
-valuand = { version = "0" }
+valuand = { version = "0.1" }
 ```
 
 Enable only specific features:
 
 ```toml
 [dependencies]
-valuand = { version = "0", default-features = false, features = ["number"] }
+valuand = { version = "0.1", default-features = false, features = ["number"] }
 ```
 
 ## 👉 Examples
