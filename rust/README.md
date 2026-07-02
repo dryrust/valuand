@@ -73,7 +73,7 @@ use valuand::{Decimal, Float, Integer, Natural, Rational, Real};
 ### Matching on [`Scalar`]
 
 ```rust,compile_fail
-match value {
+match scalar {
     Scalar::Unit => {}
     Scalar::Bool(value) => {}
     Scalar::Number(number) => {}
@@ -85,7 +85,7 @@ match value {
 ### Matching on [`ScalarType`]
 
 ```rust,compile_fail
-match value.r#type() {
+match scalar.r#type() {
     ScalarType::Unit => {}
     ScalarType::Bool => {}
     ScalarType::Number => {}
@@ -97,7 +97,7 @@ match value.r#type() {
 ### Matching on [`Real`] Numbers
 
 ```rust,compile_fail
-match value.as_number().unwrap() {
+match scalar.as_number().unwrap() {
     Real::Float(r) => {}
     Real::Decimal(r) => {}
     Real::Rational(q) => {}
