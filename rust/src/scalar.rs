@@ -1,6 +1,6 @@
 // This is free and unencumbered software released into the public domain.
 
-use super::ValueType;
+use super::ScalarType;
 use core::{any::TypeId, fmt::Debug};
 
 #[doc(hidden)]
@@ -9,7 +9,7 @@ pub struct T;
 
 /// A sum type that can hold values of any static type.
 #[derive(Debug, Default)]
-pub enum Value<T: Debug = self::T> {
+pub enum Scalar<T: Debug = self::T> {
     #[default]
     Unit,
 
@@ -21,11 +21,11 @@ pub enum Value<T: Debug = self::T> {
     Other(T),
 }
 
-impl<T> Value<T>
+impl<T> Scalar<T>
 where
     T: Debug + 'static,
 {
-    pub fn r#type(&self) -> ValueType {
+    pub fn r#type(&self) -> ScalarType {
         self.into()
     }
 
@@ -34,7 +34,7 @@ where
     }
 }
 
-impl<T> Value<T>
+impl<T> Scalar<T>
 where
     T: Debug,
 {
@@ -52,50 +52,50 @@ where
     }
 
     pub fn is_unit(&self) -> bool {
-        matches!(self, Value::Unit)
+        matches!(self, Scalar::Unit)
     }
 
     pub fn is_bool(&self) -> bool {
-        matches!(self, Value::Bool(_))
+        matches!(self, Scalar::Bool(_))
     }
 
     #[cfg(feature = "number")]
     pub fn is_number(&self) -> bool {
-        matches!(self, Value::Number(_))
+        matches!(self, Scalar::Number(_))
     }
 
     #[cfg(all(feature = "number", feature = "decimal"))]
     pub fn is_decimal(&self) -> bool {
         use super::Real;
-        matches!(self, Value::Number(Real::Decimal(_)))
+        matches!(self, Scalar::Number(Real::Decimal(_)))
     }
 
     #[cfg(all(feature = "number", feature = "float"))]
     pub fn is_float(&self) -> bool {
         use super::Real;
-        matches!(self, Value::Number(Real::Float(_)))
+        matches!(self, Scalar::Number(Real::Float(_)))
     }
 
     #[cfg(all(feature = "number", feature = "integer"))]
     pub fn is_integer(&self) -> bool {
         use super::Real;
-        matches!(self, Value::Number(Real::Integer(_)))
+        matches!(self, Scalar::Number(Real::Integer(_)))
     }
 
     #[cfg(all(feature = "number", feature = "integer"))]
     pub fn is_natural(&self) -> bool {
         use super::Real;
-        matches!(self, Value::Number(Real::Natural(_)))
+        matches!(self, Scalar::Number(Real::Natural(_)))
     }
 
     #[cfg(all(feature = "number", feature = "rational"))]
     pub fn is_rational(&self) -> bool {
         use super::Real;
-        matches!(self, Value::Number(Real::Rational(_)))
+        matches!(self, Scalar::Number(Real::Rational(_)))
     }
 
     pub fn is_other(&self) -> bool {
-        matches!(self, Value::Other(_))
+        matches!(self, Scalar::Other(_))
     }
 
     pub fn as_unit(&self) -> Option<()> {
@@ -104,7 +104,7 @@ where
 
     pub fn as_bool(&self) -> Option<&bool> {
         match self {
-            Value::Bool(value) => Some(value),
+            Scalar::Bool(value) => Some(value),
             _ => None,
         }
     }
@@ -163,22 +163,22 @@ where
 
     pub fn unwrap_unit(self) -> () {
         self.into_unit()
-            .expect("unwrap_unit() should be called on a Value::Unit value")
+            .expect("unwrap_unit() should be called on a Scalar::Unit value")
     }
 
     pub fn unwrap_bool(self) -> bool {
         self.into_bool()
-            .expect("unwrap_bool() should be called on a Value::Bool value")
+            .expect("unwrap_bool() should be called on a Scalar::Bool value")
     }
 
     #[cfg(feature = "number")]
     pub fn unwrap_number(self) -> super::Real {
         self.into_number()
-            .expect("unwrap_number() should be called on a Value::Number value")
+            .expect("unwrap_number() should be called on a Scalar::Number value")
     }
 }
 
-impl<T, U> From<&U> for Value<T>
+impl<T, U> From<&U> for Scalar<T>
 where
     T: Debug,
     U: Clone + Into<Self>,
@@ -188,20 +188,20 @@ where
     }
 }
 
-include!("value/unit.rs");
-include!("value/bool.rs");
+include!("scalar/unit.rs");
+include!("scalar/bool.rs");
 
-include!("value/f32.rs");
-include!("value/f64.rs");
+include!("scalar/f32.rs");
+include!("scalar/f64.rs");
 
-include!("value/i8.rs");
-include!("value/i16.rs");
-include!("value/i32.rs");
-include!("value/i64.rs");
-include!("value/i128.rs");
+include!("scalar/i8.rs");
+include!("scalar/i16.rs");
+include!("scalar/i32.rs");
+include!("scalar/i64.rs");
+include!("scalar/i128.rs");
 
-include!("value/u8.rs");
-include!("value/u16.rs");
-include!("value/u32.rs");
-include!("value/u64.rs");
-include!("value/u128.rs");
+include!("scalar/u8.rs");
+include!("scalar/u16.rs");
+include!("scalar/u32.rs");
+include!("scalar/u64.rs");
+include!("scalar/u128.rs");

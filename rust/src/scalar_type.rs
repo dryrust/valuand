@@ -1,14 +1,14 @@
 // This is free and unencumbered software released into the public domain.
 
-use super::Value;
+use super::Scalar;
 use core::{
     any::{Any, TypeId},
     fmt::Debug,
 };
 
-/// A type discriminator for a [`Value`].
+/// A type discriminator for a [`Scalar`].
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
-pub enum ValueType {
+pub enum ScalarType {
     #[default]
     Unit,
     Bool,
@@ -17,9 +17,9 @@ pub enum ValueType {
     Other(TypeId),
 }
 
-impl ValueType {
+impl ScalarType {
     pub fn type_id(&self) -> TypeId {
-        use ValueType::*;
+        use ScalarType::*;
         match self {
             Unit => TypeId::of::<()>(),
             Bool => TypeId::of::<bool>(),
@@ -30,21 +30,21 @@ impl ValueType {
     }
 }
 
-impl<T: Debug + 'static> From<Value<T>> for ValueType {
-    fn from(input: Value<T>) -> Self {
-        From::<&Value<T>>::from(&input)
+impl<T: Debug + 'static> From<Scalar<T>> for ScalarType {
+    fn from(input: Scalar<T>) -> Self {
+        From::<&Scalar<T>>::from(&input)
     }
 }
 
-impl<T: Debug + 'static> From<&Value<T>> for ValueType {
-    fn from(input: &Value<T>) -> Self {
-        use ValueType::*;
+impl<T: Debug + 'static> From<&Scalar<T>> for ScalarType {
+    fn from(input: &Scalar<T>) -> Self {
+        use ScalarType::*;
         match input {
-            Value::Unit => Unit,
-            Value::Bool(_) => Bool,
+            Scalar::Unit => Unit,
+            Scalar::Bool(_) => Bool,
             #[cfg(feature = "number")]
-            Value::Number(_) => Number,
-            Value::Other(x) => Other(x.type_id()),
+            Scalar::Number(_) => Number,
+            Scalar::Other(x) => Other(x.type_id()),
         }
     }
 }

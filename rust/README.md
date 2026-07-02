@@ -66,29 +66,29 @@ valuand = { version = "0", default-features = false, features = ["number"] }
 ### Importing the Library
 
 ```rust
-use valuand::{Value, ValueType};
+use valuand::{Scalar, ScalarType};
 use valuand::{Decimal, Float, Integer, Natural, Rational, Real};
 ```
 
-### Matching on [`Value`]
+### Matching on [`Scalar`]
 
 ```rust,compile_fail
 match value {
-    Value::Unit => {}
-    Value::Bool(value) => {}
-    Value::Number(number) => {}
-    Value::Other(value) => {}
+    Scalar::Unit => {}
+    Scalar::Bool(value) => {}
+    Scalar::Number(number) => {}
+    Scalar::Other(value) => {}
 }
 ```
 
-### Matching on [`ValueType`]
+### Matching on [`ScalarType`]
 
 ```rust,compile_fail
 match value.r#type() {
-    ValueType::Unit => {}
-    ValueType::Bool => {}
-    ValueType::Number => {}
-    ValueType::Other(type_id) => {}
+    ScalarType::Unit => {}
+    ScalarType::Bool => {}
+    ScalarType::Number => {}
+    ScalarType::Other(type_id) => {}
 }
 ```
 
@@ -108,10 +108,10 @@ match value.as_number().unwrap() {
 
 [docs.rs/valuand](https://docs.rs/valuand)
 
-### Variant Type
+### Scalar Type
 
-- [`Value`]
-- [`ValueType`]
+- [`Scalar`]
+- [`ScalarType`]
 
 ### Numeric Tower
 
@@ -153,12 +153,20 @@ git clone https://github.com/dryrust/valuand.git
 [Rust]: https://rust-lang.org
 [Serde]: https://serde.rs
 
+[`AnyScalar`]: https://docs.rs/valuand/latest/valuand/type.AnyScalar.html
+[`AnyScalarType`]: https://docs.rs/valuand/latest/valuand/type.AnyScalarType.html
+[`Bool`]: https://docs.rs/valuand/latest/valuand/struct.Bool.html
+[`Char`]: https://docs.rs/valuand/latest/valuand/struct.Char.html
 [`Complex`]: https://docs.rs/valuand/latest/valuand/type.Complex.html
 [`Decimal`]: https://docs.rs/valuand/latest/valuand/struct.Decimal.html
+[`DecimalError`]: https://docs.rs/valuand/latest/valuand/struct.DecimalError.html
+[`F16`]: https://docs.rs/valuand/latest/valuand/type.F16.html
+[`F32`]: https://docs.rs/valuand/latest/valuand/struct.F32.html
+[`F64`]: https://docs.rs/valuand/latest/valuand/struct.F64.html
 [`Float`]: https://docs.rs/valuand/latest/valuand/enum.Float.html
 [`Integer`]: https://docs.rs/valuand/latest/valuand/enum.Integer.html
 [`Natural`]: https://docs.rs/valuand/latest/valuand/enum.Natural.html
 [`Rational`]: https://docs.rs/valuand/latest/valuand/struct.Rational.html
 [`Real`]: https://docs.rs/valuand/latest/valuand/enum.Real.html
-[`Value`]: https://docs.rs/valuand/latest/valuand/enum.Value.html
-[`ValueType`]: https://docs.rs/valuand/latest/valuand/enum.ValueType.html
+[`Scalar`]: https://docs.rs/valuand/latest/valuand/enum.Scalar.html
+[`ScalarType`]: https://docs.rs/valuand/latest/valuand/enum.ScalarType.html

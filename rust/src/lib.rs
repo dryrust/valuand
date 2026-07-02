@@ -17,20 +17,20 @@ extern crate alloc;
 extern crate std;
 
 #[cfg(feature = "alloc")]
-mod any_value;
+mod any_scalar;
 #[cfg(feature = "alloc")]
-pub use any_value::*;
+pub use any_scalar::*;
 
 #[cfg(feature = "number")]
 mod number;
 #[cfg(feature = "number")]
 pub use number::*;
 
-mod value;
-pub use value::*;
+mod scalar;
+pub use scalar::*;
 
-mod value_type;
-pub use value_type::*;
+mod scalar_type;
+pub use scalar_type::*;
 
 #[doc = include_str!("../../README.md")]
 #[cfg(doctest)]
