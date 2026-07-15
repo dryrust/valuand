@@ -130,11 +130,13 @@ match scalar.as_number().unwrap() {
 
 #### Interoperability
 
-| Feature      | Version | Summary |
-| :----------- | :------ | :------ |
-| `borsh`      | 1.6     | Derives `borsh::{BorshSerialize, BorshDeserialize}`
-| `bson`       | 3.1     | Implements `From<T> for bson::Bson`
-| `serde`      | 1.0     | Derives `serde::{Serialize, Deserialize}`
+| Feature         | Version | Summary |
+| :-------------- | :------ | :------ |
+| `borsh`         | 1.6     | Derives `borsh::{BorshSerialize, BorshDeserialize}`
+| `bson`          | 3.1     | Implements `#to_bson`, `From<T> for bson::Bson`
+| `serde`         | 1.0     | Derives `serde::{Serialize, Deserialize}`
+| `serde_bencode` | 0.2     | Implements `#to_bencode` on `Scalar` etc.
+| `serde_json`    | 1.0     | Implements `#to_json` on `Scalar` etc.
 
 ## 👨‍💻 Development
 
