@@ -16,6 +16,11 @@ keywords = ["scalar", "variant", "bigint", "bigdecimal"]
 categories = ["rust-patterns", "data-structures", "mathematics", "no-std", "wasm"]
 publish = true
 
+# See: https://readmer.dev
+[package.metadata.readmer.project]
+title = "Valuand.rs"
+summary = "The value to be carried in Rust."
+
 [features]
 default = ["all", "std"]
 all = ["number", "math"]
